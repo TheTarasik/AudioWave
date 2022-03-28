@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +17,12 @@
 			overflow-x: hidden;
 		}
 
-		.root {
+		.wave { 
+			padding: 25px 0;
+			overflow-x: hidden;
+		}
+
+		.wave-wrapper {
 			transition: transform .5s ease;
 		}
 
@@ -55,22 +59,23 @@
 		}
 	</style>
 </head>
-
 <body>
-	<div class="root">
-		<div class="wave-main"></div>
-		<div class="wave-over"></div>
+	
+	<div class="wave">
+		<div class="wave-wrapper">
+			<div class="wave-main"></div>
+			<div class="wave-over"></div>
+		</div>
 	</div>
 
-	<div class="timestamp">0.0</div>
+	<div class="timestamp">0.0/0.0</div>
 
-	<audio id="audio" src="1.mp3?v=3" controls>
+	<audio id="audio" src="1.mp3?v=1" controls>
 </body>
-
 </html>
 
 <script>
-	const root = document.querySelector('.root');
+	const waveWrapper = document.querySelector('.wave-wrapper');
 	const waveMain = document.querySelector('.wave-main');
 	const waveOver = document.querySelector('.wave-over');
 	const audio = document.getElementById('audio');
@@ -102,7 +107,7 @@
 	});
 
 	audio.addEventListener('timeupdate', (e) => {
-		console.log(e.timeStamp);
+
 	});
 
 	window.addEventListener('resize', () => {
@@ -113,9 +118,9 @@
 		mainLoop && clearInterval(mainLoop);
 		mainLoop = setInterval(() => {
 			waveOver.style.width = `${calculateWidth()}px`;
-			root.style.transform = `translateX(${-calculateWidth()}px)`;
+			waveWrapper.style.transform = `translateX(${-calculateWidth()}px)`;
 
-			timestamp.innerHTML = audio.currentTime.toFixed(1);
+			timestamp.innerHTML = `${audio.currentTime.toFixed(1)}/${audio.duration.toFixed(1)}`;
 		}, 100);
 	};
 
