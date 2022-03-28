@@ -31,7 +31,7 @@
 			display: flex;
 			align-items: center;
 			position: relative;
-			height: 100px;
+			height: 125px;
 			left: 50%;
 		}
 
@@ -61,6 +61,7 @@
 			width: 4px;
 			height: 100%;
 			border-radius: 6px;
+			box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 		}
 
 		.timestamp {
@@ -107,11 +108,11 @@
 		const el2Span = document.createElement('span');
 
 		el.dataset.index = i + 1;
-		el.style.height = `${arr[i] <= 5 ? 5 : arr[i] / Math.max(...arr) * 100}px`;
+		el.style.height = `${arr[i] <= 8 ? 8 : arr[i] / Math.max(...arr) * 125}px`;
 		el.classList.add('item');
 		el.appendChild(elSpan);
 
-		el2.style.height = `${arr[i] <= 5 ? 5 : arr[i] / Math.max(...arr) * 100}px`;
+		el2.style.height = `${arr[i] <= 8 ? 8 : arr[i] / Math.max(...arr) * 125}px`;
 		el2.classList.add('item');
 		el2.appendChild(el2Span);
 
