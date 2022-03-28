@@ -11,7 +11,7 @@ Open terminal and paste this code:
 audiowaveform.exe -i <music-file-path> -o track.json -b 8 -z 256
 ```
 
-<music-file-path> - path to audio file
+music-file-path - path to audio file
 
 After the track.json was successfully created open this and paste array to index.html -> arr (variable)
 
