@@ -35,27 +35,42 @@
 			left: 50%;
 		}
 
+		.wave-main .item span {
+			background-color: #fff;
+		}
+
 		.wave-over {
 			position: absolute;
 			top: 0;
 			width: 0;
 			overflow: hidden;
+			pointer-events: none;
 		}
 
-		.wave-over .item {
-			background-color: purple;
+		.wave-over .item span {
+			background-color: #7851a9;
 		}
 
 		.item {
-			min-width: 4px;
+			padding: 2px;
+			cursor: pointer;
+		}
+
+		.item span {
+			display: block;
+			width: 4px;
+			height: 100%;
 			border-radius: 6px;
-			background-color: red;
-			margin: 0 0 0 4px;
 		}
 
 		.timestamp {
 			text-align: center;
 			color: #fff;
+		}
+
+		#audio {
+			display: block;
+			margin: 25px auto;
 		}
 	</style>
 </head>
@@ -87,12 +102,23 @@
 
 	for (let i = 0; i < arr.length; i++) {
 		const el = document.createElement('div');
+		const elSpan = document.createElement('span');
 		const el2 = document.createElement('div');
+		const el2Span = document.createElement('span');
+
+		el.dataset.index = i + 1;
 		el.style.height = `${arr[i] <= 5 ? 5 : arr[i] / Math.max(...arr) * 100}px`;
 		el.classList.add('item');
+		el.appendChild(elSpan);
 
 		el2.style.height = `${arr[i] <= 5 ? 5 : arr[i] / Math.max(...arr) * 100}px`;
 		el2.classList.add('item');
+		el2.appendChild(el2Span);
+
+		el.addEventListener('click', (e) => {
+			audio.currentTime = Number(e.currentTarget.dataset.index) / arr.length * audio.duration;
+			updateWave();
+		});
 
 		waveMain.appendChild(el);
 		waveOver.appendChild(el2);
@@ -107,7 +133,7 @@
 	});
 
 	audio.addEventListener('timeupdate', (e) => {
-
+		updateWave();
 	});
 
 	window.addEventListener('resize', () => {
@@ -117,15 +143,18 @@
 	const startPlayer = () => {
 		mainLoop && clearInterval(mainLoop);
 		mainLoop = setInterval(() => {
-			waveOver.style.width = `${calculateWidth()}px`;
-			waveWrapper.style.transform = `translateX(${-calculateWidth()}px)`;
-
-			timestamp.innerHTML = `${audio.currentTime.toFixed(1)}/${audio.duration.toFixed(1)}`;
+			updateWave();
 		}, 100);
 	};
 
 	const stopPlayer = () => {
 		clearInterval(mainLoop);
+	};
+
+	const updateWave = () => {
+		waveOver.style.width = `${calculateWidth()}px`;
+		waveWrapper.style.transform = `translateX(${-calculateWidth()}px)`;
+		timestamp.innerHTML = `${audio.currentTime.toFixed(1)}/${audio.duration.toFixed(1)}`;
 	};
 
 	const calculateWidth = () => {
