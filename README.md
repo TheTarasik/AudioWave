@@ -1,5 +1,5 @@
 # audio-wave
-[link](https://thetarasik.github.io/audio-wave/)
+[View demo](https://thetarasik.github.io/audio-wave/)
 
 Using a few library:
   - [audiowaveform](https://github.com/bbc/audiowaveform)
