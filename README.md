@@ -1,4 +1,4 @@
-# audio-wave
+# AudioWave
 [View demo](https://thetarasik.github.io/audio-wave/)
 
 Using a few library:
