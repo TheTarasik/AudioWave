@@ -2,7 +2,7 @@
 [View demo](https://thetarasik.github.io/audio-wave/)
 
 Using a few library:
-  - [audiowaveform](https://github.com/bbc/audiowaveform)
+  - [audiowaveform](https://thetarasik.github.io/AudioWave/)
   - [waveform-data](https://www.npmjs.com/package/waveform-data)
 
 To generate own amplitude you must download audiowaveform under you OS.
